@@ -186,3 +186,6 @@
 ![image](figure/alertmanager-ui.PNG)
 
 ## 삭제 가이드
+* 목저기 prometheus 삭제
+* /manifest 폴더로 이동 후 kubectl delete -f /manifest 를 실행한다.
+* prometheus-k8s pod가 완전히 삭제되는 것을 확인 한 후 kubectl delete -f /setup 을 실행한다.
