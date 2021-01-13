@@ -9,23 +9,23 @@
 
 
 ## 구축 가이드
-    * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
-    ```
-    $ sudo docker pull timescaledev/promscale-extension:latest-pg12
-	$ sudo docker pull timescale/promscale:0.1.4
-    ```
-    * 생성한 이미지 tar 파일을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 push한다.
-    ```
-    $ sudo docker load < promscale-extension:latest-pg12.tar
-    $ sudo docker load < timescale/promscale:0.1.4.tar
+* 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다
+```
+$ sudo docker pull timescaledev/promscale-extension:latest-pg12
+$ sudo docker pull timescale/promscale:0.1.4
+```
+* 생성한 이미지 tar 파일을 폐쇄망 환경으로 이동시킨 뒤 사용하려는 registry에 push한다.
+```
+$ sudo docker load < promscale-extension:latest-pg12.tar
+$ sudo docker load < timescale/promscale:0.1.4.tar
     
-    $ sudo docker tag timescaledev/promscale-extension:latest-pg12 ${REGISTRY}/timescaledev/promscale-extension:latest-pg12
-    $ sudo docker tag timescale/promscale:0.1.4 ${REGISTRY}/timescale/promscale:0.1.4
-    
-    $ sudo docker push ${REGISTRY}/timescaledev/promscale-extension:latest-pg12
-    $ sudo docker push ${REGISTRY}/timescale/promscale:0.1.4
+$ sudo docker tag timescaledev/promscale-extension:latest-pg12 ${REGISTRY}/timescaledev/promscale-extension:latest-pg12
+$ sudo docker tag timescale/promscale:0.1.4 ${REGISTRY}/timescale/promscale:0.1.4
+  
+$ sudo docker push ${REGISTRY}/timescaledev/promscale-extension:latest-pg12
+$ sudo docker push ${REGISTRY}/timescale/promscale:0.1.4
 	
-    ```
+```
 	
 	
 	
