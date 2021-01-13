@@ -8,8 +8,7 @@
 ## Prerequisite
 
 
-## 폐쇄망 구축 가이드
-
+## 구축 가이드
     * 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받는다.
     ```
     $ sudo docker pull timescaledev/promscale-extension:latest-pg12
