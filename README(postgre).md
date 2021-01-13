@@ -31,27 +31,28 @@ $ sudo docker push ${REGISTRY}/timescale/promscale:0.1.4
 	
 
 ## 설치 가이드
-1. [PVC 및 postgre pod 생성](#step-1-prometheus-namespace-%EB%B0%8F-crd-%EC%83%9D%EC%84%B1)
-2. [promscale-connector 설치](#step-2-prometheus-%EB%AA%A8%EB%93%88%EB%93%A4%EC%97%90-%EB%8C%80%ED%95%9C-deploy-%EB%B0%8F-rbac-%EC%83%9D%EC%84%B1)
-3. [prometheus 설정 변경](#step-3-kube-scheduler-%EC%99%80-kube-controller-manager-%EC%84%A4%EC%A0%95)
+1. [pvc 및 postgre pod 생성](#step-1-pvc-%EB%B0%8F-postgre-pod-%EC%83%9D%EC%84%B1)
+2. [pro	mscale-connector 설치](#step-2-promscale-connector-%EC%84%A4%EC%B9%98)
+3. [prometheus 설정 변경](#step-3-prometheus-%EC%84%A4%EC%A0%95-%EB%B3%80%EA%B2%BD)
+4. [확인](#step-4-%ED%99%95%EC%9D%B8)
 	
 ***
 
 ## Step 1. PVC 및 postgre pod 생성
 * 목적 : postgre가 사용할 pvc와 postgre pod 생성
-* kubectl create -f postgre-pvc.yaml 명령어를 통해 pvc와 pv 생성
-* postgre-password-secret.yaml 에서 $PASSWORD를 원하는 비밀번호를 BASE64로 인코딩하여 대체
-* kubectl create -f postgre-password-secret.yaml 명령어를 통해 postgre DB에서 사용할 비밀번호를 위한 secret 생성
-* postgre-deployment.yaml 에서 원하는 db user id를 $USER_ID에 대체
+* kubectl create -f postgre-pvc.yaml 명령어를 통해 pvc와 pv 생성 [postgre-pvc.yaml](https://github.com/tmax-cloud/install-prometheus/blob/main/postgre-connection-guide/manifest/postgre-pvc.yaml)
+* postgre-password-secret.yaml 에서 $PASSWORD를 원하는 비밀번호를 BASE64로 인코딩하여 대체 [postgre-password-secret.yaml](https://github.com/tmax-cloud/install-prometheus/blob/main/postgre-connection-guide/manifest/postgre-password-secret.yaml)
+* kubectl create -f postgre-password-secret.yaml 명령어를 통해 postgre DB에서 사용할 비밀번호를 위한 secret 생성 
+* postgre-deployment.yaml 에서 원하는 db user id를 $USER_ID에 대체 [postgre-deployment.yaml](https://github.com/tmax-cloud/install-prometheus/blob/main/postgre-connection-guide/manifest/postgre-deployment.yaml)
 * kubectl create -f postgre-deployment.yaml 명령어를 통해 postgre deployment와 service 생성
-[setup](/manifest/setup)
+
 
 ***
 
 ## Step 2. promscale-connector 설치
 * 목적 : promscale-connector pod 및 service 생성, postgre와 연결
-* postgre-deployment.yaml 에서 $USER_ID를 postgre에 설정한 db user id로 대체
-* kubectl create -f postgre-deployment.yaml 명령어를 통해 promscale-connector pod 와 service 생성([manifests](/manifest/manifests)
+* promscale-connector-deployment.yaml 에서 $USER_ID를 postgre에 설정한 db user id로 대체 [promscale-connector-deployment.yaml](https://github.com/tmax-cloud/install-prometheus/blob/main/postgre-connection-guide/manifest/promscale-connector-deployment.yaml)
+* kubectl create -f postgre-deployment.yaml 명령어를 통해 promscale-connector pod 와 service 생성
 
 ***
 
