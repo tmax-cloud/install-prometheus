@@ -189,3 +189,12 @@ $ sed -i "s/quay.io\/coreos\/prometheus-operator/${REGISTRY}\/coreos\/prometheus
 * 목적: prometheus 삭제
 * /manifest 폴더로 이동 후 kubectl delete -f /manifest 를 실행한다.
 * prometheus-k8s pod가 완전히 삭제되는 것을 확인 한 후 kubectl delete -f /setup 을 실행한다.
+
+## 자원 할당 가이드
+* 목적 : prometheus의 자원 할당
+* prometheus-operator : 
+	limits: cpu: 200m / memory: 200Mi
+	requests: cpu: 100m / memory: 100Mi
+* prometheus :
+	limit : X
+	requests: cpu: 10m / memory: 2Gi
