@@ -193,8 +193,27 @@ $ sed -i "s/quay.io\/coreos\/prometheus-operator/${REGISTRY}\/coreos\/prometheus
 ## 자원 할당 가이드
 * 목적 : prometheus의 자원 할당
 * prometheus-operator : 
-	limits: cpu: 200m / memory: 200Mi
-	requests: cpu: 100m / memory: 100Mi
+	limits : cpu: 200m / memory: 200Mi
+	requests : cpu: 100m / memory: 100Mi
 * prometheus :
 	limit : X
-	requests: cpu: 10m / memory: 2Gi
+	requests : cpu: 10m / memory: 2Gi
+* alertmanager :
+	limit : X
+	requests : cpu: 100m / memory: 200Mi
+* grafana :
+	limits : cpu: 200m / memory: 200Mi
+	requests : cpu: 100m / memory: 100Mi
+* kube-state-metrics:
+	limits : cpu: 20m / memory: 40Mi
+	requests : cpu: 10m / memory: 20Mi
+* node-exporter :
+	node-exporter container :
+		limits : cpu: 250m / memory: 180Mi
+		requests : cpu: 102m / memory: 180Mi
+	kube0rbac-proxy container :
+		limits : cpu: 20m / memory: 40Mi
+		requests : cpu: 10m / memory: 20Mi
+* prometheus-adapter :
+	limits : cpu: 200m / memory: 200Mi
+	requests : cpu: 200m / memory: 200Mi
