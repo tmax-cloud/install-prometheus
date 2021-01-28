@@ -39,6 +39,13 @@ spec:
         - mountPath: /etc/adapter
           name: config
           readOnly: false
+        resources:
+          limit:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 200m
+            memory: 200Mi
       nodeSelector:
         kubernetes.io/os: linux
       serviceAccountName: prometheus-adapter
