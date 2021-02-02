@@ -27,10 +27,10 @@ spec:
         resources:
           limits:
             cpu: 250m
-            memory: 180Mi
+            memory: 100Mi
           requests:
-            cpu: 102m
-            memory: 180Mi
+            cpu: 100m
+            memory: 50Mi
         volumeMounts:
         - mountPath: /host/proc
           name: proc
