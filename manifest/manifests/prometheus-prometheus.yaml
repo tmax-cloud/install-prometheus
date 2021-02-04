@@ -24,6 +24,9 @@ spec:
   podMonitorSelector: {}
   replicas: 2
   resources:
+    limits:
+      cpu: 100m
+      memory: 200Mi
     requests:
       cpu: 10m
       memory: 200Mi
