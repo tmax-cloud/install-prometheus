@@ -5,7 +5,6 @@
 * prometheus ([quay.io/prometheus/prometheus:v2.11.0](https://quay.io/repository/prometheus/prometheus?tag=latest&tab=tags))
 * prometheus-operator ([quay.io/coreos/prometheus-operator:v0.34.0](https://quay.io/repository/coreos/prometheus-operator?tag=latest&tab=tags))
 * node-exporter ([quay.io/prometheus/node-exporter:v0.18.1](https://quay.io/repository/prometheus/node-exporter?tag=latest&tab=tags))
-* grafana ([grafana/grafana:6.4.3](https://grafana.com/grafana/download))
 * kube-state-metric ([quay.io/coreos/kube-state-metrics:v1.8.0](https://quay.io/repository/coreos/kube-state-metrics?tag=latest&tab=tags))
 * configmap-reloader ([quay.io/coreos/prometheus-config-reloader:v0.34.0](https://quay.io/repository/coreos/prometheus-config-reloader?tag=latest&tab=tags))
 * configmap-reload ([quay.io/coreos/configmap-reload:v0.0.1](https://quay.io/repository/coreos/configmap-reload?tag=latest&tab=tags))
@@ -26,7 +25,6 @@ $ export PROMETHEUS_HOME=~/prometheus-install
 $ export PROMETHEUS_VERSION=v2.11.0
 $ export PROMETHEUS_OPERATOR_VERSION=v0.34.0
 $ export NODE_EXPORTER_VERSION=v0.18.1
-$ export GRAFANA_VERSION=6.4.3
 $ export KUBE_STATE_METRICS_VERSION=v1.8.0
 $ export CONFIGMAP_RELOADER_VERSION=v0.34.0
 $ export CONFIGMAP_RELOAD_VERSION=v0.0.1
@@ -44,8 +42,6 @@ $ sudo docker pull quay.io/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERS
 $ sudo docker save quay.io/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION} > prometheus-operator_${PROMETHEUS_OPERATOR_VERSION}.tar
 $ sudo docker pull quay.io/prometheus/node-exporter:${NODE_EXPORTER_VERSION}
 $ sudo docker save quay.io/prometheus/node-exporter:${NODE_EXPORTER_VERSION} > node-exporter_${NODE_EXPORTER_VERSION}.tar
-$ sudo docker pull grafana/grafana:${GRAFANA_VERSION}
-$ sudo docker save grafana/grafana:${GRAFANA_VERSION} > grafana_${GRAFANA_VERSION}.tar
 $ sudo docker pull quay.io/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION}
 $ sudo docker save quay.io/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION} > kube-state-metrics_${KUBE_STATE_METRICS_VERSION}.tar
 $ sudo docker pull quay.io/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION}
@@ -64,7 +60,6 @@ $ sudo docker save quay.io/prometheus/alertmanager:${ALERTMANAGER_VERSION} > ale
 $ sudo docker load < prometheus-prometheus_${PROMETHEUS_VERSION}.tar
 $ sudo docker load < prometheus-operator_${PROMETHEUS_OPERATOR_VERSION}.tar
 $ sudo docker load < node-exporter_${NODE_EXPORTER_VERSION}.tar
-$ sudo docker load < grafana_${GRAFANA_VERSION}.tar
 $ sudo docker load < kube-state-metrics_${KUBE_STATE_METRICS_VERSION}.tar
 $ sudo docker load < config-reloader_${CONFIGMAP_RELOADER_VERSION}.tar
 $ sudo docker load < config-reload_${CONFIGMAP_RELOAD_VERSION}.tar
@@ -75,7 +70,6 @@ $ sudo docker load < alertmanager_${ALERTMANAGER_VERSION}.tar
 $ sudo docker tag quay.io/prometheus/prometheus:${PROMETHEUS_VERSION} ${REGISTRY}/prometheus/prometheus:${PROMETHEUS_VERSION}
 $ sudo docker tag quay.io/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION} ${REGISTRY}/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION}
 $ sudo docker tag quay.io/prometheus/node-exporter:${NODE_EXPORTER_VERSION} ${REGISTRY}/prometheus/node-exporter:${NODE_EXPORTER_VERSION}
-$ sudo docker tag grafana/grafana:${GRAFANA_VERSION} ${REGISTRY}/grafana:${GRAFANA_VERSION}
 $ sudo docker tag quay.io/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION} ${REGISTRY}/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION}
 $ sudo docker tag quay.io/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION} ${REGISTRY}/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION}
 $ sudo docker tag quay.io/coreos/configmap-reload:${CONFIGMAP_RELOAD_VERSION} ${REGISTRY}/coreos/configmap-reload:${CONFIGMAP_RELOAD_VERSION}
@@ -86,7 +80,6 @@ $ sudo docker tag quay.io/prometheus/alertmanager:${ALERTMANAGER_VERSION} ${REGI
 $ sudo docker push ${REGISTRY}/prometheus/prometheus:${PROMETHEUS_VERSION}
 $ sudo docker push ${REGISTRY}/coreos/prometheus-operator:${PROMETHEUS_OPERATOR_VERSION}
 $ sudo docker push ${REGISTRY}/prometheus/node-exporter:${NODE_EXPORTER_VERSION}
-$ sudo docker push ${REGISTRY}/grafana:${GRAFANA_VERSION}
 $ sudo docker push ${REGISTRY}/coreos/kube-state-metrics:${KUBE_STATE_METRICS_VERSION}
 $ sudo docker push ${REGISTRY}/coreos/prometheus-config-reloader:${CONFIGMAP_RELOADER_VERSION}
 $ sudo docker push ${REGISTRY}/coreos/configmap-reload:${CONFIGMAP_RELOAD_VERSION}
@@ -99,7 +92,6 @@ $ sudo docker push ${REGISTRY}/prometheus/alertmanager:${ALERTMANAGER_VERSION}
 * manifests 폴더에 들어가서 아래의 명령어들을 실행한다.
 ```
 $ sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
-$ sed -i 's/{GRAFANA_VERSION}/'${GRAFANA_VERSION}'/g' grafana-deployment.yaml
 $ sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' kube-state-metrics-deployment.yaml
 $ sed -i 's/{KUBE_STATE_METRICS_VERSION}/'${KUBE_STATE_METRICS_VERSION}'/g' kube-state-metrics-deployment.yaml
 $ sed -i 's/{NODE_EXPORTER_VERSION}/'${NODE_EXPORTER_VERSION}'/g' node-exporter-daemonset.yaml
@@ -118,7 +110,6 @@ $ sed -i 's/{CONFIGMAP_RELOAD_VERSION}/'${CONFIGMAP_RELOAD_VERSION}'/g' promethe
 * (manifests 폴더)
 ```
 $ sed -i "s/quay.io\/prometheus\/alertmanager/${REGISTRY}\/prometheus\/alertmanager/g" alertmanager-alertmanager.yaml
-$ sed -i "s/grafana\/grafana/${REGISTRY}\/grafana/g" grafana-deployment.yaml
 $ sed -i "s/quay.io\/coreos\/kube-rbac-proxy/${REGISTRY}\/coreos\/kube-rbac-proxy/g" kube-state-metrics-deployment.yaml
 $ sed -i "s/quay.io\/coreos\/kube-state-metrics/${REGISTRY}\/coreos\/kube-state-metrics/g" kube-state-metrics-deployment.yaml
 $ sed -i "s/quay.io\/prometheus\/node-exporter/${REGISTRY}\/prometheus\/node-exporter/g" node-exporter-daemonset.yaml
@@ -151,12 +142,10 @@ $ sed -i "s/quay.io\/coreos\/prometheus-operator/${REGISTRY}\/coreos\/prometheus
 ***
 
 ## Step 2. Prometheus 모듈들에 대한 deploy 및 RBAC 생성
-* 목적 : Prometheus server, adapter, node exporter, kube-state-metrics, grafana 등을 생성
+* 목적 : Prometheus server, adapter, node exporter, kube-state-metrics 등을 생성
 
 
 * kubectl create -f manifests/ 명령어를 통해 Prometheus 모듈 생성([manifests](/manifest/manifests)
-* 비고
-	* Prometheus UI 또는 Grafana 를 사용할 경우 kubectl edit svc $PROMETHEUS_SVC -n monitoring 또는 kubectl edit svc $GRAFANA_SVC -n monitoring 명령어를 통해 ClusterIP 타입으로 생성된 서비스를 LoadBalancer 타입으로 수정한 뒤 해당 IP:port 를 통해 대시보드에 접근할 수 있음
 
 ***
 
@@ -190,11 +179,3 @@ $ sed -i "s/quay.io\/coreos\/prometheus-operator/${REGISTRY}\/coreos\/prometheus
 * /manifest 폴더로 이동 후 kubectl delete -f /manifest 를 실행한다.
 * prometheus-k8s pod가 완전히 삭제되는 것을 확인 한 후 kubectl delete -f /setup 을 실행한다.
 
-## 자원 할당 가이드
-* 목적 : prometheus관련 pod들에 자원 할당
-* prometheus-operator : 
-	limits: cpu: 200m / memory: 200Mi
-	requests: cpu: 100m / memory: 100Mi
-* prometheus :
-	limit : X
-	requests: cpu: 10m / memory: 2Gi

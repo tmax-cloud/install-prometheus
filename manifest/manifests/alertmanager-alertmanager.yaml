@@ -7,9 +7,16 @@ metadata:
   namespace: monitoring
 spec:
   image: quay.io/prometheus/alertmanager:{ALERTMANAGER_VERSION}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 200Mi
+    requests:
+      cpu: 100m
+      memory: 200Mi
   nodeSelector:
     kubernetes.io/os: linux
-  replicas: 3
+  replicas: 1
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
