@@ -1,7 +1,7 @@
 
 
 
-cd manifests
+
 
 sudo docker pull quay.io/prometheus/prometheus:${PROMETHEUS_VERSION}
 sudo docker save quay.io/prometheus/prometheus:${PROMETHEUS_VERSION} > prometheus-prometheus_${PROMETHEUS_VERSION}.tar
@@ -55,7 +55,7 @@ sudo docker push ${REGISTRY}/coreos/kube-rbac-proxy:${KUBE_RBAC_PROXY_VERSION}
 sudo docker push ${REGISTRY}/coreos/k8s-prometheus-adapter-amd64:${PROMETHEUS_ADAPTER_VERSION}
 sudo docker push ${REGISTRY}/prometheus/alertmanager:${ALERTMANAGER_VERSION}
 
-cd manifests
+cd manifest
 
 sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
 sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' kube-state-metrics-deployment.yaml
@@ -100,4 +100,4 @@ yq e '.metadata.labels.k8s-app = "kube-controller-manager"' -i ./kube-controller
 kubectl apply -f kube-controller-manager.yaml
 
 kubectl create -f setup/
-kubectl create -f manifests/
+kubectl create -f manifest/
