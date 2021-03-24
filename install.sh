@@ -1,7 +1,7 @@
 
 
 
-
+cd manifests
 
 sudo docker pull quay.io/prometheus/prometheus:${PROMETHEUS_VERSION}
 sudo docker save quay.io/prometheus/prometheus:${PROMETHEUS_VERSION} > prometheus-prometheus_${PROMETHEUS_VERSION}.tar
