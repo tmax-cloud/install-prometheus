@@ -1,6 +1,6 @@
 
 
-
+cd yaml
 cd manifest
 
 sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
