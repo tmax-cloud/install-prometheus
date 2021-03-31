@@ -1,7 +1,5 @@
-
-
 cd yaml
-cd manifest
+cd manifests
 
 sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' alertmanager-alertmanager.yaml
 sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' kube-state-metrics-deployment.yaml
@@ -48,4 +46,4 @@ yq e '.metadata.labels.k8s-app = "kube-controller-manager"' -i ./kube-controller
 kubectl apply -f kube-controller-manager.yaml
 
 kubectl create -f setup/
-kubectl create -f manifest/
+kubectl create -f manifests/
