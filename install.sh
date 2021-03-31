@@ -1,3 +1,6 @@
+ sudo chmod +x version.conf
+ source version.conf
+
 cd yaml
 cd manifests
 
