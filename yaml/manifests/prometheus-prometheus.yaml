@@ -13,7 +13,7 @@ spec:
         resources:
           requests:
             storage: 10Gi
-        storageClassName: rook-ceph-block
+        storageClassName: csi-rbd-sc
   alerting:
     alertmanagers:
     - name: alertmanager-main
