@@ -31,3 +31,4 @@ sudo docker push ${REGISTRY}/coreos/k8s-prometheus-adapter-amd64:${PROMETHEUS_AD
 sudo docker push ${REGISTRY}/prometheus/alertmanager:${ALERTMANAGER_VERSION}
 
 sudo mv yq /usr/bin/
+sudo chmod +x /usr/bin/yq
