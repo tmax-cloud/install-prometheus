@@ -14,13 +14,19 @@
 
 
 
-
 ## Step 0. Prometheus Config 설정
 * 목적 : `version.conf 파일에 설치를 위한 정보 기입`
 * 순서: 
 	* 환경에 맞는 config 내용 작성
 		* version.conf 에 알맞는 버전과 registry 정보를 입력한다.
-	
+## 폐쇠망 구축 가이드
+* 외부 네트워크 통신이 가능한 환경에서 setImg.sh를 이용 하여 이미지 및 패키지를 다운로드 받고 local Repository에 푸쉬한다.	
+* 외부 네트워크 환경 스크립트 실행 순서
+	```bash
+	sudo chmod +x version.conf
+	sudo source version.conf
+	sudo ./setImg.sh
+	```
 ## Step 1. installer 실행
 * 목적 : `설치를 위한 shell script 실행`
 * 순서: 
