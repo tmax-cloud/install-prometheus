@@ -1,3 +1,5 @@
+cd img/
+
 sudo docker load < prometheus-prometheus_${PROMETHEUS_VERSION}.tar
 sudo docker load < prometheus-operator_${PROMETHEUS_OPERATOR_VERSION}.tar
 sudo docker load < node-exporter_${NODE_EXPORTER_VERSION}.tar
