@@ -25,7 +25,15 @@
 	```bash
 	sudo chmod +x version.conf
 	sudo source version.conf
+	sudo chmod +x setImg.sh
 	sudo ./setImg.sh
+	```
+* 폐쇄망 설치 스크립트 실행순서
+	```bash
+	source version.conf
+	sudo chmod +x version.conf
+	sudo chmod +x setLocalReg.sh
+	sudo ./setLocalReg.sh
 	```
 ## Step 1. installer 실행
 * 목적 : `설치를 위한 shell script 실행`
