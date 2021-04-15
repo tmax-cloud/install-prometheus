@@ -38,7 +38,7 @@ sudo sed -i 's/{CONFIGMAP_RELOAD_VERSION}/'${CONFIGMAP_RELOAD_VERSION}'/g' $SETU
 
 if ! command -v yq 2>/dev/null ; then
   sudo wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/bin/yq &&\
-  sudo chmod +x /usr/bin/yq
+  chmod +x /usr/bin/yq
 fi
 
 
