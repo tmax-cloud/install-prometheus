@@ -24,16 +24,16 @@
 * 외부 네트워크 환경 스크립트 실행 순서
 	```bash
 	chmod +x version.conf
-	sudo source version.conf
+	source version.conf
 	chmod +x setImg.sh
-	sudo ./setImg.sh
+	./setImg.sh
 	```
 * 폐쇄망 설치 스크립트 실행순서
 	```bash
 	source version.conf
 	chmod +x version.conf
 	chmod +x setLocalReg.sh
-	sudo ./setLocalReg.sh
+	./setLocalReg.sh
 	```
 ## Step 1. installer 실행
 * 목적 : `설치를 위한 shell script 실행`
@@ -41,7 +41,7 @@
 	* 권한 부여 및 실행
 	``` bash
 	chmod +x install.sh
-sudo ./install.sh
+	./install.sh
 	```
 
 
