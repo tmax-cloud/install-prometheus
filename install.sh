@@ -44,11 +44,11 @@ fi
 
 kubectl get pod `kubectl get pod -n kube-system -o jsonpath='{.items[?(@.metadata.labels.component == "kube-scheduler")].metadata.name}'` -n kube-system -o yaml > $SCRIPTDIR/kube-scheduler.yaml
 sudo yq e '.metadata.labels.k8s-app = "kube-scheduler"' -i $SCRIPTDIR/kube-scheduler.yaml
-sudo mv $SCRIPTDIR/kube-scheduler.yaml /etc/manifest/kubernetes/
+sudo mv $SCRIPTDIR/kube-scheduler.yaml /etc/kubernetes/manifests/
 
 kubectl get pod `kubectl get pod -n kube-system -o jsonpath='{.items[?(@.metadata.labels.component == "kube-controller-manager")].metadata.name}'` -n kube-system -o yaml > $SCRIPTDIR/kube-controller-manager.yaml
 sudo yq e '.metadata.labels.k8s-app = "kube-controller-manager"' -i $SCRIPTDIR/kube-controller-manager.yaml
-sudo mv $SCRIPTDIR/kube-controller-manager.yaml /etc/manifest/kubernetes/
+sudo mv $SCRIPTDIR/kube-controller-manager.yaml /etc/kubernetes/manifests/
 
 kubectl create -f $SETUP_HOME
 kubectl create -f $MANIFEST_HOME
