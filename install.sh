@@ -26,9 +26,9 @@ if [ $REGISTRY != "{REGISTRY}" ]; then
 fi
 
 if [ $REGISTRY != "{REGISTRY}" ]; then
-	sudo sed -i "s/quay.io\/coreos\/configmap-reload/${REGISTRY}\/coreos\/configmap-reload/g" prometheus-operator-deployment.yaml
-	sudo sed -i "s/quay.io\/coreos\/prometheus-config-reloader/${REGISTRY}\/coreos\/prometheus-config-reloader/g" prometheus-operator-deployment.yaml
-	sudo sed -i "s/quay.io\/coreos\/prometheus-operator/${REGISTRY}\/coreos\/prometheus-operator/g" prometheus-operator-deployment.yaml
+	sudo sed -i "s/quay.io\/coreos\/configmap-reload/${REGISTRY}\/coreos\/configmap-reload/g" $SETUP_HOME/prometheus-operator-deployment.yaml
+	sudo sed -i "s/quay.io\/coreos\/prometheus-config-reloader/${REGISTRY}\/coreos\/prometheus-config-reloader/g" $SETUP_HOME/prometheus-operator-deployment.yaml
+	sudo sed -i "s/quay.io\/coreos\/prometheus-operator/${REGISTRY}\/coreos\/prometheus-operator/g" $SETUP_HOME/prometheus-operator-deployment.yaml
 		 
 fi
 
