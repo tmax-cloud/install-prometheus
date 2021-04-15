@@ -19,20 +19,20 @@
 * 순서: 
 	* 환경에 맞는 config 내용 작성
 		* version.conf 에 알맞는 버전과 registry 정보를 입력한다.
-## 폐망 구축 가이드
+## 폐쇄망 구축 가이드
 * 외부 네트워크 통신이 가능한 환경에서 setImg.sh를 이용 하여 이미지 및 패키지를 다운로드 받고 local Repository에 푸쉬한다.	
 * 외부 네트워크 환경 스크립트 실행 순서
 	```bash
-	sudo chmod +x version.conf
+	chmod +x version.conf
 	sudo source version.conf
-	sudo chmod +x setImg.sh
+	chmod +x setImg.sh
 	sudo ./setImg.sh
 	```
 * 폐쇄망 설치 스크립트 실행순서
 	```bash
 	source version.conf
-	sudo chmod +x version.conf
-	sudo chmod +x setLocalReg.sh
+	chmod +x version.conf
+	chmod +x setLocalReg.sh
 	sudo ./setLocalReg.sh
 	```
 ## Step 1. installer 실행
@@ -40,8 +40,8 @@
 * 순서: 
 	* 권한 부여 및 실행
 	``` bash
-	$ sudo chmod +x install.sh
-	$ ./install.sh
+	chmod +x install.sh
+sudo ./install.sh
 	```
 
 
