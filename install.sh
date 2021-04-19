@@ -14,6 +14,7 @@ sudo sed -i 's/{NODE_EXPORTER_VERSION}/'${NODE_EXPORTER_VERSION}'/g' $MANIFEST_H
 sudo sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' $MANIFEST_HOME/node-exporter-daemonset.yaml
 sudo sed -i 's/{PROMETHEUS_ADAPTER_VERSION}/'${PROMETHEUS_ADAPTER_VERSION}'/g' $MANIFEST_HOME/prometheus-adapter-deployment.yaml
 sudo sed -i 's/{PROMETHEUS_VERSION}/'${PROMETHEUS_VERSION}'/g' $MANIFEST_HOME/prometheus-prometheus.yaml
+sudo sed -i 's/{PROMETHEUS_PVC}/'${PROMETHEUS_PVC}'/g' $MANIFEST_HOME/prometheus-prometheus.yaml
 
 if [ $REGISTRY != "{REGISTRY}" ]; then
 	sudo sed -i "s/quay.io\/prometheus\/alertmanager/${REGISTRY}\/prometheus\/alertmanager/g" $MANIFEST_HOME/alertmanager-alertmanager.yaml
