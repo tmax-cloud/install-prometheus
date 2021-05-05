@@ -6,20 +6,7 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
-  storage:
-    volumeClaimTemplate:
-      spec:
-        accessModes: [ "ReadWriteMany" ]
-        resources:
-          requests:
-            storage: {PROMETHEUS_PVC}
-        storageClassName: csi-rbd-sc
-  alerting:
-    alertmanagers:
-    - name: alertmanager-main
-      namespace: monitoring
-      port: web
-  image: quay.io/prometheus/prometheus:{PROMETHEUS_VERSION}
+  image: quay.io/prometheus/prometheus:v2.11.0
   nodeSelector:
     kubernetes.io/os: linux
   podMonitorSelector: {}
@@ -39,4 +26,4 @@ spec:
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
-  version: {PROMETHEUS_VERSION}
+  version: v2.11.0
