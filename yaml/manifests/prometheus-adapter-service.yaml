@@ -4,7 +4,7 @@ metadata:
   labels:
     name: prometheus-adapter
   name: prometheus-adapter
-  namespace: agent-system
+  namespace: hypercloud5-system
 spec:
   ports:
   - name: https

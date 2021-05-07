@@ -4,7 +4,7 @@ metadata:
   labels:
     k8s-app: kubelet
   name: kubelet
-  namespace: agent-system
+  namespace: hypercloud5-system
   
 spec:
   endpoints:

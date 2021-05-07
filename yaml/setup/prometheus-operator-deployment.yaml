@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: prometheus-operator
     app.kubernetes.io/version: v0.34.0
   name: prometheus-operator
-  namespace: agent-system
+  namespace: hypercloud5-system
 spec:
   replicas: 1
   selector:

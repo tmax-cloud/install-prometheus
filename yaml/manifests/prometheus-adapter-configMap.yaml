@@ -30,4 +30,4 @@ data:
 kind: ConfigMap
 metadata:
   name: adapter-config
-  namespace: agent-system
+  namespace: hypercloud5-system

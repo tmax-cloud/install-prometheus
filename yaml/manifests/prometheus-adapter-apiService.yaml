@@ -8,6 +8,6 @@ spec:
   insecureSkipTLSVerify: true
   service:
     name: prometheus-adapter
-    namespace: agent-system
+    namespace: hypercloud5-system
   version: v1beta1
   versionPriority: 100
