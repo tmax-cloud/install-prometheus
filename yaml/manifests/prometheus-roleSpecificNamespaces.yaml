@@ -36,7 +36,7 @@ items:
   kind: Role
   metadata:
     name: prometheus-k8s
-    namespace: monitoring
+    namespace: agent-system
   rules:
   - apiGroups:
     - ""

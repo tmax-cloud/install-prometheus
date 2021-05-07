@@ -4,7 +4,7 @@ metadata:
   labels:
     prometheus: k8s
   name: k8s
-  namespace: monitoring
+  namespace: agent-system
 spec:
   image: quay.io/prometheus/prometheus:v2.11.0
   nodeSelector:
