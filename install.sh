@@ -1,11 +1,9 @@
 #!/bin/bash
-  
+
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 MANIFEST_HOME=$SCRIPTDIR/yaml/manifests
 SETUP_HOME=$SCRIPTDIR/yaml/setup
-
 source $SCRIPTDIR/version.conf
-
 
 sudo sed -i 's/{ALERTMANAGER_VERSION}/'${ALERTMANAGER_VERSION}'/g' $MANIFEST_HOME/alertmanager-alertmanager.yaml
 sudo sed -i 's/{KUBE_RBAC_PROXY_VERSION}/'${KUBE_RBAC_PROXY_VERSION}'/g' $MANIFEST_HOME/kube-state-metrics-deployment.yaml
@@ -42,7 +40,52 @@ if ! command -v yq 2>/dev/null ; then
   chmod +x /usr/bin/yq
 fi
 
+if ! command -v sshpass 2>/dev/null ; then
+  sudo yum install https://download-ib01.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/s/sshpass-1.06-9.el8.x86_64.rpm
+  # yum install sshpass
+fi
 
+i=0
+
+#IFS=' ' read -r -a masters <<< $(kubectl get nodes --selector=node-role.kubernetes.io/master -o jsonpath='{$.items[*].status.addresses[?(@.type=="InternalIP")].address}')
+
+for master in  "${SUB_MASTER_IP[@]}"
+do
+  
+  if [ $master == $MAIN_MASTER_IP ]; then
+    continue
+  fi
+  #sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master"  sudo wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/bin/yq
+  #sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master"  sudo chmod +x /usr/bin/yq
+
+ 
+
+  #sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" scp /usr/bin/yq ${MASTER_NODE_ROOT_USER[i]}@"$master":/usr/bin/yq
+  #sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" scp /usr/bin/sshpass ${MASTER_NODE_ROOT_USER[i]}@"$master":/usr/bin/sshpass
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" yum install yq
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo cp /etc/kubernetes/manifests/etcd.yaml .
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq e '"'"'.metadata.labels.k8s-app = "etcd"'"'"' -i etcd.yaml'
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo mv -f ./etcd.yaml /etc/kubernetes/manifests/etcd.yaml
+
+
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo cp /etc/kubernetes/manifests/kube-scheduler.yaml .
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq e '"'"'.metadata.labels.k8s-app = "kube-scheduler"'"'"' -i kube-scheduler.yaml'
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq eval '"'"'del(.spec.containers[0].command[] | select(. == "--port*") )'"'"' -i kube-scheduler.yaml'
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo mv -f ./kube-scheduler.yaml /etc/kubernetes/manifests/kube-scheduler.yaml
+
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo cp /etc/kubernetes/manifests/kube-controller-manager.yaml .
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq e '"'"'.metadata.labels.k8s-app = "kube-controller-manager"'"'"' -i kube-controller-manager.yaml'
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq eval '"'"'del(.spec.containers[0].command[] | select(. == "--port*") )'"'"' -i kube-controller-manager.yaml'
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo mv -f ./kube-controller-manager.yaml /etc/kubernetes/manifests/kube-controller-manager.yaml
+  i=$((i+1))
+done
+
+
+
+#sudo cp /etc/kubernetes/manifests/kube-scheduler.yaml .
+#sudo cp /etc/kubernetes/manifests/kube-controller-manager.yaml .
+#sudo yq e '.metadata.labels.k8s-app = "kube-scheduler"' -i kube-scheduler.yaml
+#sudo yq e '.metadata.labels.k8s-app = "kube-controller-manager"' -i kube-controller-manager.yaml
 #kubectl get pod `kubectl get pod -n kube-system -o jsonpath='{.items[?(@.metadata.labels.component == "kube-scheduler")].metadata.name}'` -n kube-system -o yaml > $SCRIPTDIR/kube-scheduler.yaml
 #sudo yq e '.metadata.labels.k8s-app = "kube-scheduler"' -i $SCRIPTDIR/kube-scheduler.yaml
 #sudo mv $SCRIPTDIR/kube-scheduler.yaml /etc/kubernetes/manifests/

@@ -30,5 +30,4 @@ sudo docker push ${REGISTRY}/coreos/kube-rbac-proxy:${KUBE_RBAC_PROXY_VERSION}
 sudo docker push ${REGISTRY}/coreos/k8s-prometheus-adapter-amd64:${PROMETHEUS_ADAPTER_VERSION}
 sudo docker push ${REGISTRY}/prometheus/alertmanager:${ALERTMANAGER_VERSION}
 
-sudo mv yq /usr/bin/
-sudo chmod +x /usr/bin/yq
+
