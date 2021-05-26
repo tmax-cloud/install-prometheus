@@ -49,12 +49,29 @@ i=0
 
 #IFS=' ' read -r -a masters <<< $(kubectl get nodes --selector=node-role.kubernetes.io/master -o jsonpath='{$.items[*].status.addresses[?(@.type=="InternalIP")].address}')
 
+sudo cp /etc/kubernetes/manifests/etcd.yaml .
+sudo yq e '.metadata.labels.k8s-app = "etcd"' -i etcd.yaml
+sudo yq eval '(.spec.containers[0].command[] | select(. == "--listen-metrics-urls*")) = "--listen-metrics-urls=http://{MAIN_MASTER_IP}:2381,http://127.0.0.1:2381"' -i etcd.yaml
+sudo sed -i 's/{MAIN_MASTER_IP}/'${MAIN_MASTER_IP}'/g' etcd.yaml
+sudo mv -f ./etcd.yaml /etc/kubernetes/manifests/etcd.yaml
+
+sudo cp /etc/kubernetes/manifests/kube-scheduler.yaml .
+sudo yq e '.metadata.labels.k8s-app = "kube-scheduler"' -i kube-scheduler.yaml
+sudo yq eval 'del(.spec.containers[0].command[] | select(. == "--port*") )' -i kube-scheduler.yaml
+sudo mv -f ./kube-scheduler.yaml /etc/kubernetes/manifests/kube-scheduler.yaml
+
+sudo cp /etc/kubernetes/manifests/kube-controller-manager.yaml .
+sudo yq e '.metadata.labels.k8s-app = "kube-controller-manager"' -i kube-controller-manager.yaml
+sudo yq eval 'del(.spec.containers[0].command[] | select(. == "--port*") )' -i kube-controller-manager.yaml
+sudo mv -f ./kube-controller-manager.yaml /etc/kubernetes/manifests/kube-controller-manager.yaml
+
 for master in  "${SUB_MASTER_IP[@]}"
 do
   
   if [ $master == $MAIN_MASTER_IP ]; then
     continue
   fi
+  echo "$master on work"
   #sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master"  sudo wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/bin/yq
   #sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master"  sudo chmod +x /usr/bin/yq
 
@@ -65,6 +82,9 @@ do
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" yum install yq
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo cp /etc/kubernetes/manifests/etcd.yaml .
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq e '"'"'.metadata.labels.k8s-app = "etcd"'"'"' -i etcd.yaml'
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq eval '"'"'(.spec.containers[0].command[] | select(. == "--listen-metrics-urls*")) = "--listen-metrics-urls=http://{master}:2381,http://127.0.0.1:2381"'"'"' -i etcd.yaml'
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo sed -i 's/{master}/'${master}'/g' etcd.yaml
+
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo mv -f ./etcd.yaml /etc/kubernetes/manifests/etcd.yaml
 
 
