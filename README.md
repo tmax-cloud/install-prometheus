@@ -36,6 +36,11 @@
 	chmod +x setLocalReg.sh
 	./setLocalReg.sh
 	```
+* 외부 통신이 가능한 환경에서 yq 패키지를 다운받는다.
+	```bash
+	sudo wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/bin/yq
+	```
+* yq bin 파일을 각 마스터의 /usr/bin/으로 복사한다.
 ## Step 1. installer 실행
 * 목적 : `설치를 위한 shell script 실행`
 * 순서: 
