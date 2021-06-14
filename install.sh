@@ -48,7 +48,7 @@ fi
 i=0
 
 #IFS=' ' read -r -a masters <<< $(kubectl get nodes --selector=node-role.kubernetes.io/master -o jsonpath='{$.items[*].status.addresses[?(@.type=="InternalIP")].address}')
-
+echo "$MAIN_MASTER_IP on work"
 sudo cp /etc/kubernetes/manifests/etcd.yaml .
 sudo yq e '.metadata.labels.k8s-app = "etcd"' -i etcd.yaml
 sudo yq eval '(.spec.containers[0].command[] | select(. == "--listen-metrics-urls*")) = "--listen-metrics-urls=http://{MAIN_MASTER_IP}:2381,http://127.0.0.1:2381"' -i etcd.yaml
