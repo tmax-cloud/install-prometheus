@@ -9,11 +9,12 @@ source $SCRIPTDIR/version.conf
 
 if ! command -v yq 2>/dev/null ; then
   sudo wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/bin/yq &&\
-  chmod +x /usr/bin/yq
+  sudo chmod +x /usr/bin/yq
 fi
 
 if ! command -v sshpass 2>/dev/null ; then
   sudo yum install https://download-ib01.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/s/sshpass-1.06-9.el8.x86_64.rpm
+  sudo chmod +x /usr/bin/sshpass
   # yum install sshpass
 fi
 
