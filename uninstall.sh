@@ -62,5 +62,5 @@ do
 done
 
 kubectl delete -f $MANIFEST_HOME
-#sleep 30s
+sleep 10s
 kubectl delete -f $SETUP_HOME
