@@ -39,7 +39,7 @@ do
   if [ $master == $MAIN_MASTER_IP ]; then
     continue
   fi
-  i=$((i+1))
+
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" scp /usr/bin/yq ${MASTER_NODE_ROOT_USER[i]}@"$master":/usr/bin/yq
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo cp /etc/kubernetes/manifests/etcd.yaml .
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq e '"'"'del(.metadata.labels.k8s-app)'"'"' -i etcd.yaml'
@@ -57,7 +57,7 @@ do
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq eval '"'"'.spec.containers[0].command += "--port=0"'"'"' -i kube-controller-manager.yaml'
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo mv -f ./kube-controller-manager.yaml /etc/kubernetes/manifests/kube-controller-manager.yaml
 
-
+  i=$((i+1))
 done
 
 kubectl delete -f $MANIFEST_HOME
