@@ -77,9 +77,9 @@ do
 
  
 
-  #sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" scp /usr/bin/yq ${MASTER_NODE_ROOT_USER[i]}@"$master":/usr/bin/yq
-  #sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" scp /usr/bin/sshpass ${MASTER_NODE_ROOT_USER[i]}@"$master":/usr/bin/sshpass
-  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" yum install yq
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" scp /usr/bin/yq ${MASTER_NODE_ROOT_USER[i]}@"$master":/usr/bin/yq
+  sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" scp /usr/bin/sshpass ${MASTER_NODE_ROOT_USER[i]}@"$master":/usr/bin/sshpass
+  #sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" yum install yq
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" sudo cp /etc/kubernetes/manifests/etcd.yaml .
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq e '"'"'.metadata.labels.k8s-app = "etcd"'"'"' -i etcd.yaml'
   sudo sshpass -p "${MASTER_NODE_ROOT_PASSWORD[i]}" ssh -o StrictHostKeyChecking=no ${MASTER_NODE_ROOT_USER[i]}@"$master" 'sudo yq eval '"'"'(.spec.containers[0].command[] | select(. == "--listen-metrics-urls*")) = "--listen-metrics-urls=http://{master}:2381,http://127.0.0.1:2381"'"'"' -i etcd.yaml'
