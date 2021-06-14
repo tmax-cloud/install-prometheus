@@ -116,4 +116,5 @@ done
 #sudo mv $SCRIPTDIR/kube-controller-manager.yaml /etc/kubernetes/manifests/
 
 kubectl create -f $SETUP_HOME
+sleep 10s
 kubectl create -f $MANIFEST_HOME
