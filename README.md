@@ -51,11 +51,13 @@
 	```
 
 
-## Step 2. kube-scheduler 와 kube-controller-manager 설정
+## Step 2. kube-scheduler, kube-controller-manager,  etcd 설정
 
-* 목적 : Kubernetes의 scheduler 정보와 controller 정보를 수집하기 위함
+* 목적 : Kubernetes의 scheduler 정보와 controller 정보, etcd 정보를 수집하기 위함
 
-* monitoring namespace의 servicemonitor 객체 중 kube-controller-manager 와 kube-scheduler의 spec.endpoints.metricRelabelings 부분 삭제
 * kube-system namespace에 있는 모든 kube-schduler pod의 metadata.labels에k8s-app: kube-scheduler추가
 * kube-system namespace에 있는 모든 kube-contoroller-manager pod의 metadata.labels에k8s-app: kube-controller-manager 추가
+* kube-system namespace에 있는 모든 etcd pod의 metadata.labels에k8s-app: etcd 추가
+* kube-system namespace에 있는 모든 kube-schduler pod의 spec.container.command에서 --port=0 삭제
+* kube-system namespace에 있는 모든 kube-contoroller-manager pod의 spec.container.command에서 --port=0 삭제
 
