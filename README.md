@@ -51,7 +51,7 @@
 	```
 
 
-## Step 2. kube-scheduler, kube-controller-manager,  etcd 설정
+## Step 2. kube-scheduler, kube-controller-manager,  etcd 설정 ( Sub master의 user와 password를 모를 시)
 
 * 목적 : Kubernetes의 scheduler 정보와 controller 정보, etcd 정보를 수집하기 위함
 
