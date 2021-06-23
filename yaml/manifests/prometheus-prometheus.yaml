@@ -13,7 +13,7 @@ spec:
         resources:
           requests:
             storage: {PROMETHEUS_PVC}
-        storageClassName: csi-rbd-sc
+#        storageClassName: csi-rbd-sc
   alerting:
     alertmanagers:
     - name: alertmanager-main
