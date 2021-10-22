@@ -2134,8 +2134,8 @@ objects:
   - apiVersion: v1
     kind: Service
     metadata:
-      app: grafana
-      labels: null
+      labels:
+        app: grafana
       name: '${APP_NAME_GRAFANA}-service'
       namespace: '${NAMESPACE}'
     spec:
