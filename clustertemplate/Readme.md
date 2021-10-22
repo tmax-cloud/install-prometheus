@@ -18,4 +18,4 @@ INGRESS_IP = ingress IP
 NAMESPACEC = namespace이름
 ```
 설정 후 template instance 생성
-***
+
