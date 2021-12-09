@@ -32,8 +32,8 @@ if [ $REGISTRY != "{REGISTRY}" ]; then
 fi
 
 sudo sed -i 's/{PROMETHEUS_OPERATOR_VERSION}/'${PROMETHEUS_OPERATOR_VERSION}'/g' $SETUP_HOME/prometheus-operator-deployment.yaml
-sudo sed -i 's/{CONFIGMAP_RELOADER_VERSION}/'${CONFIGMAP_RELOADER_VERSION}'/g' $SETUP_HOME/prometheus-operator-deployment.yaml
-sudo sed -i 's/{CONFIGMAP_RELOAD_VERSION}/'${CONFIGMAP_RELOAD_VERSION}'/g' $SETUP_HOME/prometheus-operator-deployment.yaml
+sudo sed -i 's/{PROMETHEUS_CONFIG_RELOADER_VERSION}/'${PROMETHEUS_CONFIG_RELOADER_VERSION}'/g' $SETUP_HOME/prometheus-operator-deployment.yaml
+
 
 if ! command -v yq 2>/dev/null ; then
   sudo wget https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -O /usr/bin/yq &&\
