@@ -2,36 +2,51 @@ apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   labels:
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 2.30.3
     prometheus: k8s
   name: k8s
   namespace: monitoring
 spec:
-  storage:
-    volumeClaimTemplate:
-      spec:
-        accessModes: [ "ReadWriteMany" ]
-        resources:
-          requests:
-            storage: {PROMETHEUS_PVC}
-#        storageClassName: csi-rbd-sc
   alerting:
     alertmanagers:
-    - name: alertmanager-main
+    - apiVersion: v2
+      name: alertmanager-main
       namespace: monitoring
       port: web
+  enableFeatures: []
+  externalLabels: {}
   image: quay.io/prometheus/prometheus:{PROMETHEUS_VERSION}
+  remoteRead:
+  - url: "http://promscale.monitoring.svc.cluster.local:9201/read"
+    readRecent: true
+  remoteWrite:
+  - url: "http://promscale.monitoring.svc.cluster.local:9201/write"
+  storage:
+    emptyDir: # this could directly be a `v1.EmptyDirVolumeSource{}`
+      medium: Memory
+      sizeLimit: 4Gi
   nodeSelector:
     kubernetes.io/os: linux
+  podMetadata:
+    labels:
+      app.kubernetes.io/component: prometheus
+      app.kubernetes.io/name: prometheus
+      app.kubernetes.io/part-of: kube-prometheus
+      app.kubernetes.io/version: 2.30.3
+  podMonitorNamespaceSelector: {}
   podMonitorSelector: {}
+  probeNamespaceSelector: {}
+  probeSelector: {}
   replicas: 1
   resources:
     requests:
       cpu: 10m
       memory: 2Gi
-  ruleSelector:
-    matchLabels:
-      prometheus: k8s
-      role: alert-rules
+  ruleNamespaceSelector: {}
+  ruleSelector: {}
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
@@ -39,4 +54,4 @@ spec:
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
-  version: {PROMETHEUS_VERSION}
+  version: 2.30.3

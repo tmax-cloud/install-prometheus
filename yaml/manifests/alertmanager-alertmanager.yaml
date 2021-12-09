@@ -3,17 +3,30 @@ kind: Alertmanager
 metadata:
   labels:
     alertmanager: main
+    app.kubernetes.io/component: alert-router
+    app.kubernetes.io/name: alertmanager
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 0.23.0
   name: main
   namespace: monitoring
 spec:
   image: quay.io/prometheus/alertmanager:{ALERTMANAGER_VERSION}
-  resources:
-    requests:
-      memory: 200Mi
-      cpu: 100m
   nodeSelector:
     kubernetes.io/os: linux
-  replicas: 1
+  podMetadata:
+    labels:
+      app.kubernetes.io/component: alert-router
+      app.kubernetes.io/name: alertmanager
+      app.kubernetes.io/part-of: kube-prometheus
+      app.kubernetes.io/version: {ALERTMANAGER_VERSION}
+  replicas: 3
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    requests:
+      cpu: 4m
+      memory: 100Mi
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
