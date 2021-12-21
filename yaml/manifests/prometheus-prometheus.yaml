@@ -23,6 +23,7 @@ spec:
   nodeSelector:
     kubernetes.io/os: linux
   podMonitorSelector: {}
+  podMonitorNamespaceSelector: {}
   replicas: 1
   resources:
     requests:
