@@ -37,7 +37,7 @@ spec:
           imagePullPolicy: Always
           image: timescale/promscale:0.6.2
           args:
-            - "-db-user=postgres"
+            - "-db-user=$USER_ID"
             - "-db-host=$(PROMSCALE_DB_HOST)"
             - "-db-port=5432"
             - "-db-name=postgres"
