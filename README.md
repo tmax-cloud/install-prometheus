@@ -61,3 +61,20 @@
 * kube-system namespace에 있는 모든 kube-schduler pod의 spec.container.command에서 --port=0 삭제
 * kube-system namespace에 있는 모든 kube-contoroller-manager pod의 spec.container.command에서 --port=0 삭제
 
+
+## 기타 : HyperCloud5.0 prometheus Spec 정보
+|Namespace|Pod|Container 수|Container|Container image|Request| |Limit| |
+|:----|:----|:----|:----|:----|:----|:----|:----|:----|
+| | | | | |cpu|memory|cpu|memory|
+|monitoring|alertmanager-main|2|alertmanager|quay.io/prometheus/alertmanager:v0.20.0|100m|200Mi|100m|200Mi|
+| |alertmanager-main-0| |config-reloader|quay.io/coreos/configmap-reload:v0.0.1| | | | |
+| |kube-state-metrics|3|kube-rbac-proxy-main|quay.io/coreos/kube-rbac-proxy:v0.4.1|10m|20Mi|20m|40Mi|
+| |kube-state-metrics| |kube-rbac-proxy-self|quay.io/coreos/kube-rbac-proxy:v0.4.1|10m|20Mi|20m|40Mi|
+| |kube-state-metrics| |kube-state-metrics|quay.io/coreos/kube-state-metrics:v0.34.0|100m|150Mi|10m|150Mi|
+| |node-exporter|2|node-exporter|quay.io/prometheus/node-exporter:v0.18.1|100m|50Mi|250m|100Mi|
+| |node-exporter| |kube-rbac-proxy|quay.io/coreos/kube-rbac-proxy:v0.4.1|10m|20Mi|20m|40Mi|
+| |prometheus-adapter|1|prometheus-adapter|quay.io/coreos/k8s-prometheus-adapter-amd64:v0.5.0|200m|200Mi|100|200Mi|
+| |prometheus-k8s|3|prometheus|quay.io/prometheus/prometheus:v2.11.0|100m|200Mi|100m|200Mi|
+| |prometheus-k8s| |prometheus-config-reloader|quay.io/coreos/prometheus-config-reloader:v0.34.0| | | | |
+| |prometheus-k8s| |rules-configmap-reloader|quay.io/coreos/configmap-reload:v0.0.1| | | | |
+| |prometheus-operator|1|prometheus-operator|quay.io/coreos/prometheus-operator:v0.34.0|100m|100Mi|200m|200Mi|
