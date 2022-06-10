@@ -1,6 +1,6 @@
 
 # Prometheus 설치 가이드
-##개요
+## 개요
 * k8s 환경에서 metric data들을 수집/저장한다.
 * PromQL을 이용해 metric data들을 편리하게 조회 할 수 있다.
 * 다양한 DB에 metric data들을 remote read/write 할 수 있다.
