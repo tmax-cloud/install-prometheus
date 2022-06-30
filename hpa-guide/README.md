@@ -1,6 +1,6 @@
 # Auto scaling based on jmx-exporter with HPA
 
-## 구성 Pod
+## 구성
 * custom metric api
 * configmap
 * hpa
