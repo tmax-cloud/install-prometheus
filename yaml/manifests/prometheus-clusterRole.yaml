@@ -12,9 +12,18 @@ rules:
   - ""
   resources:
   - nodes/metrics
+  - endpoints
+  - namespaces
+  - services
+  - pods
+  - nodes/proxy
+  - nodes
   verbs:
   - get
+  - list
+  - watch
 - nonResourceURLs:
   - /metrics
   verbs:
   - get
+  
