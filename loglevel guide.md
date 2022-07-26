@@ -23,3 +23,7 @@ node-exporter 내 kube-rbac-proxy 컨테이너는 --v=0으로 지정
 ## 5. alertmanager
 
 alertmanager CR 내 spec.logLevel 에debug, error, info, warn으로 작성
+
+## 6. prometheus-adapter
+
+deployment의 args에  --v=x(0~10)로 설정
