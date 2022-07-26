@@ -12,7 +12,7 @@ prometheus CR 내 spec.logLevel 에debug, error, info, warn으로 작성
 
 ## 3. kube-state-metrics
 
-deployment의 args 에 --v=x(0,1,2,3,4,5) 로 설정
+deployment의 args 에 --v=x(0,1,2,3,4,5) (5가 로 설정
 (kube-rbac-proxy 포함)
 
 ## 4. node-exporter
