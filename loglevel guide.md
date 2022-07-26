@@ -26,4 +26,4 @@ alertmanager CR 내 spec.logLevel 에debug, error, info, warn으로 작성
 
 ## 6. prometheus-adapter
 
-deployment의 args에  --v=x(0~10)로 설정
+deployment의 args에  --v=x(0~10)로 설정 (10이 
