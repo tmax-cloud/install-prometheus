@@ -2,17 +2,17 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    component: kube-scheduler
-  name: kube-scheduler
+    component: etcd
+  name: etcd
   namespace: monitoring
 spec:
   endpoints:
   - interval: 30s
-    port: http-metrics
+    port: http
   jobLabel: component
   namespaceSelector:
     matchNames:
     - kube-system
   selector:
     matchLabels:
-      component: kube-scheduler
+      component: etcd
