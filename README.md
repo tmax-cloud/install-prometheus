@@ -58,9 +58,5 @@
 
 * 목적 : Kubernetes의 scheduler 정보와 controller 정보, etcd 정보를 수집하기 위함
 
-* kube-system namespace에 있는 모든 kube-schduler pod의 metadata.labels에k8s-app: kube-scheduler추가
-* kube-system namespace에 있는 모든 kube-contoroller-manager pod의 metadata.labels에k8s-app: kube-controller-manager 추가
-* kube-system namespace에 있는 모든 etcd pod의 metadata.labels에k8s-app: etcd 추가
-* kube-system namespace에 있는 모든 kube-schduler pod의 spec.container.command에서 --port=0 삭제
-* kube-system namespace에 있는 모든 kube-contoroller-manager pod의 spec.container.command에서 --port=0 삭제
+* kube-scheduler와 kube-controller-manager의 binda-address 는 반드시 0.0.0.0이여야한다.(bind-address는 listening하는 대상을 나타냄)
 
