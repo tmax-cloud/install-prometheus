@@ -7,10 +7,10 @@ metadata:
     component: kube-scheduler
 spec:
   ports:
-    - name: http-metrics
+    - name: https-metrics
       protocol: TCP
-      port: 10251
-      targetPort: 10251
+      port: 10259
+      targetPort: 10259
   selector:
     component: kube-scheduler
   clusterIP: None
