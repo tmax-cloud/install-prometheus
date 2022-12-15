@@ -60,3 +60,6 @@
 
 * kube-scheduler와 kube-controller-manager의 binda-address 는 반드시 0.0.0.0이여야한다.(bind-address는 listening하는 대상을 나타냄)
 
+## 싱글클러스터 가이드(aws로 설치 시)
+
+* 9100, 2381, 10257, 10259 port에 대해 인바운드 룰을 추가해주어야함.
