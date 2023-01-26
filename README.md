@@ -5,15 +5,14 @@
 * PromQL을 이용해 metric data들을 편리하게 조회 할 수 있다.
 * 다양한 DB에 metric data들을 remote read/write 할 수 있다.
 ## 구성 요소
-* prometheus ([quay.io/prometheus/prometheus:v2.30.3](https://quay.io/repository/prometheus/prometheus?tag=latest&tab=tags))
-* prometheus-operator ([quay.io/coreos/prometheus-operator:v0.51.2](https://quay.io/repository/coreos/prometheus-operator?tag=latest&tab=tags))
-* node-exporter ([quay.io/prometheus/node-exporter:v1.2.2](https://quay.io/repository/prometheus/node-exporter?tag=latest&tab=tags))
-* kube-state-metric ([quay.io/coreos/kube-state-metrics:v2.2.3](https://quay.io/repository/coreos/kube-state-metrics?tag=latest&tab=tags))
-* configmap-reloader ([quay.io/coreos/prometheus-config-reloader:v0.51.2](https://quay.io/repository/coreos/prometheus-config-reloader?tag=latest&tab=tags))
-* configmap-reload ([quay.io/coreos/configmap-reload:v0.0.1](https://quay.io/repository/coreos/configmap-reload?tag=latest&tab=tags))
-* kube-rbac-proxy ([quay.io/coreos/kube-rbac-proxy:v0.11.0](https://quay.io/repository/coreos/kube-rbac-proxy?tag=latest&tab=tags))
-* prometheus-adapter ([quay.io/coreos/k8s-prometheus-adapter-amd64:v0.9.1](https://quay.io/repository/coreos/k8s-prometheus-adapter-amd64?tag=latest&tab=tags))
-* alertmanager ([quay.io/prometheus/alertmanager:v0.23.0](https://quay.io/repository/prometheus/alertmanager?tag=latest&tab=tags))
+* prometheus ([quay.io/prometheus/prometheus:v2.41.0](https://quay.io/repository/prometheus/prometheus?tag=latest&tab=tags))
+* prometheus-operator ([quay.io/coreos/prometheus-operator:v0.62.0](https://quay.io/repository/coreos/prometheus-operator?tag=latest&tab=tags))
+* node-exporter ([quay.io/prometheus/node-exporter:v1.5.0](https://quay.io/repository/prometheus/node-exporter?tag=latest&tab=tags))
+* kube-state-metric ([quay.io/coreos/kube-state-metrics:v2.7.0](https://quay.io/repository/coreos/kube-state-metrics?tag=latest&tab=tags))
+* configmap-reloader ([quay.io/coreos/prometheus-config-reloader:v0.62.0](https://quay.io/repository/coreos/prometheus-config-reloader?tag=latest&tab=tags))
+* kube-rbac-proxy ([quay.io/coreos/kube-rbac-proxy:v0.14.0](https://quay.io/repository/coreos/kube-rbac-proxy?tag=latest&tab=tags))
+* prometheus-adapter ([quay.io/coreos/k8s-prometheus-adapter-amd64:v0.10.0](https://quay.io/repository/coreos/k8s-prometheus-adapter-amd64?tag=latest&tab=tags))
+* alertmanager ([quay.io/prometheus/alertmanager:v0.25.0](https://quay.io/repository/prometheus/alertmanager?tag=latest&tab=tags))
 
 
 
