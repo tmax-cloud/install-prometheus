@@ -28,7 +28,10 @@ spec:
   resources:
     requests:
       cpu: 10m
-      memory: 2Gi
+      memory: 4Gi
+    limits:
+      cpu: 10m
+      memory: 4Gi
   ruleSelector:
     matchLabels:
       prometheus: k8s
