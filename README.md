@@ -62,3 +62,7 @@
 ## 싱글클러스터 가이드(aws로 설치 시)
 
 * 9100, 2381, 10257, 10259 port에 대해 인바운드 룰을 추가해주어야함.
+
+
+## 프로메테우스 memory 크기 할당 규칙
+[해당링크](https://www.robustperception.io/how-much-ram-does-prometheus-2-x-need-for-cardinality-and-ingestion/) 에서 확인하여 메모리 할당
