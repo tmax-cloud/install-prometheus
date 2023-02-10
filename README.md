@@ -81,3 +81,7 @@
 | |prometheus-k8s| |prometheus-config-reloader|quay.io/coreos/prometheus-config-reloader:v0.34.0| | | | |
 | |prometheus-k8s| |rules-configmap-reloader|quay.io/coreos/configmap-reload:v0.0.1| | | | |
 | |prometheus-operator|1|prometheus-operator|quay.io/coreos/prometheus-operator:v0.34.0|100m|100Mi|200m|200Mi|
+
+
+## 프로메테우스 memory 크기 할당 규칙
+[해당링크](https://www.robustperception.io/how-much-ram-does-prometheus-2-x-need-for-cardinality-and-ingestion/) 에서 확인하여 메모리 할당
